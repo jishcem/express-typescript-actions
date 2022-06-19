@@ -8,6 +8,5 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
-    // eslint-disable-next-line no-console
     console.log(`App is listening on http://localhost:8000/`);
 });
