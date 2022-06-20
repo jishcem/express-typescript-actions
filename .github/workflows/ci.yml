@@ -6,13 +6,27 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  BUCKET_NAME : "typescript-express-artifact"
+  AWS_REGION : "ap-south-1"
+
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+      contents: read    
+
     steps:
+      - name: Git clone the repository
       - uses: actions/checkout@v3
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::464615698121:role/GitHub-actions-Role
+          aws-region: ${{ env.BUCKET_NAME }}
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -20,3 +34,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run lint
+
+      - name: Copy artifact to the S3 bucket
+        run: |
+          aws s3 sync --delete ./dist s3/${{ env.BUCKET_NAME }}
