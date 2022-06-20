@@ -30,10 +30,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: Extract commit hash
+        shell: bash
+        run: echo "##[set-output name=commit_hash;]$(echo "$GITHUB_SHA")"
+        id: extract_hash          
       - run: npm ci
       - run: npm run build
       - run: npm run lint
 
       - name: Copy artifact to the S3 bucket
         run: |
-          aws s3 sync --delete ./dist s3://${{ env.BUCKET_NAME }}
+          aws s3 sync --delete ./dist s3://${{ env.BUCKET_NAME }}/${{ steps.extract_branch.outputs.branch }}/${{ steps.extract_hash.outputs.commit_hash }}
