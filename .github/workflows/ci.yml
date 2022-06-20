@@ -36,4 +36,4 @@ jobs:
 
       - name: Copy artifact to the S3 bucket
         run: |
-          aws s3 sync --delete ./dist s3/${{ env.BUCKET_NAME }}
+          aws s3 sync --delete ./dist s3://${{ env.BUCKET_NAME }}
