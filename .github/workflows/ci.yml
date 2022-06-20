@@ -25,7 +25,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::464615698121:role/GitHub-actions-Role
-          aws-region: ${{ env.BUCKET_NAME }}
+          aws-region: ${{ env.AWS_REGION }}
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
