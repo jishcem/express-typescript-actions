@@ -5,6 +5,14 @@ on:
     branches:
       - main
 
+env:
+  BUCKET_NAME : "typescript-express-artifact"
+  AWS_REGION : "ap-south-1"
+# permission can be added at job level or workflow level    
+permissions:
+      id-token: write
+      contents: read    # This is required for actions/checkout    
+
 jobs:
   deploy:
     name: Deploy
@@ -14,3 +22,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::464615698121:role/gitHub-actions-role
+          role-session-name: samplerolesession
+          aws-region: ${{ env.AWS_REGION }}      
