@@ -54,3 +54,19 @@ jobs:
         run: |
           zip -r ./artifacts/project.zip . -x node_modules/**\* .git/**\* dist/**\* dist/**\*          
           aws s3 sync  ${GITHUB_WORKSPACE}/artifacts s3://${{ env.BUCKET_NAME }}/${{ steps.extract_branch.outputs.branch }}/latest
+
+
+  deploy:
+
+    runs-on: ubuntu-latest
+    environment: Dev
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::464615698121:role/gitHub-actions-role
+          role-session-name: cdsession
+          aws-region: ${{ env.AWS_REGION }}  
