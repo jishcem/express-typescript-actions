@@ -49,4 +49,5 @@ jobs:
       # Copy build directory to S3
       - name:  Copy build to S3
         run: |
-          aws s3 sync --delete --exclude "node_modules/*" . s3://${{ env.BUCKET_NAME }}/${{ steps.extract_branch.outputs.branch }}/latest
+          zip -r project.zip .
+          aws s3 sync project.zip s3://${{ env.BUCKET_NAME }}/${{ steps.extract_branch.outputs.branch }}/latest
