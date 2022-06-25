@@ -52,4 +52,5 @@ jobs:
           zip -r project.zip . -x node_modules/**\* .git/**\* dist/**\* dist/**\*
           ls -laH | grep zip
           echo  ${GITHUB_WORKSPACE}
+          echo pwd
           aws s3 sync  ${GITHUB_WORKSPACE}/project.zip s3://${{ env.BUCKET_NAME }}/${{ steps.extract_branch.outputs.branch }}/latest
