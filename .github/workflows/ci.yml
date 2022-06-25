@@ -49,6 +49,6 @@ jobs:
       # Copy build directory to S3
       - name:  Copy build to S3
         run: |
-          zip -r project.zip . -x ./node_modules/*
+          zip -r project.zip . -x node_modules/**\* .git/**\*
           ls -laH | grep zip
           aws s3 sync ./project.zip s3://${{ env.BUCKET_NAME }}/${{ steps.extract_branch.outputs.branch }}/latest
