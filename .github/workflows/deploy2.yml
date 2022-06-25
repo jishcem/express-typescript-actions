@@ -6,6 +6,7 @@ on:
 env:
   BUCKET_NAME : "typescript-express-artifact"
   AWS_REGION : "ap-south-1"
+  GITHUB_REF: "main"
 
 
 jobs:
@@ -62,8 +63,8 @@ jobs:
     - uses: actions/checkout@v2
     - uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
-        role-session-name: GitHub-Action-Role
+        role-to-assume: arn:aws:iam::464615698121:role/gitHub-actions-role
+        role-session-name: samplerolesession
         aws-region: ${{ env.AWS_REGION }}
     - run: |
         echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
