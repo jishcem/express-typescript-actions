@@ -51,4 +51,4 @@ jobs:
         run: |
           zip -r project.zip . -x node_modules/**\* .git/**\* dist/**\* dist/**\*
           ls -laH | grep zip
-          aws s3 sync ./project.zip s3://${{ env.BUCKET_NAME }}/${{ steps.extract_branch.outputs.branch }}/latest
+          aws s3 sync project.zip s3://${{ env.BUCKET_NAME }}/${{ steps.extract_branch.outputs.branch }}/latest
