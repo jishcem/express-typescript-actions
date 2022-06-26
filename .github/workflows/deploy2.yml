@@ -67,5 +67,4 @@ jobs:
         role-session-name: GitHub-Action-Role
         aws-region: ${{ env.AWS_REGION }}
     - run: |
-        echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
-        commit_hash=`git rev-parse HEAD`        
+        echo "Deploying branch"
