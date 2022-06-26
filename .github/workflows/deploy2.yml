@@ -23,7 +23,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::464615698121:role/gitHub-actions-role
-          role-session-name: gitHub-actions-role
+          role-session-name: GitHub-Action-Role
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Extract branch name
@@ -64,7 +64,7 @@ jobs:
     - uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: arn:aws:iam::464615698121:role/gitHub-actions-role
-        role-session-name: gitHub-actions-role
+        role-session-name: GitHub-Action-Role
         aws-region: ${{ env.AWS_REGION }}
     - run: |
         echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
