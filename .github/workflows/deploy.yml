@@ -53,18 +53,14 @@ jobs:
           aws s3 sync  ${GITHUB_WORKSPACE}/artifacts s3://${{ env.BUCKET_NAME }}/${{ steps.extract_branch.outputs.branch }}/latest
         
   deploy:
+    name: Deploy to EC2
     needs: build
     runs-on: ubuntu-latest
-    environment: Dev
     permissions:
       id-token: write
-      contents: read
+      contents: read    
+    environment: Dev
+
     steps:
+    - name: Checkout
     - uses: actions/checkout@v2
-    - uses: aws-actions/configure-aws-credentials@v1
-      with:
-        role-to-assume: arn:aws:iam::464615698121:role/gitHub-actions-role
-        role-session-name: GitHub-Action-Role
-        aws-region: ${{ env.AWS_REGION }}
-    - run: |
-        echo "Deploying branch"
