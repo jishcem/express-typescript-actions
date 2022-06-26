@@ -70,3 +70,5 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::464615698121:role/gitHub-actions-role
         aws-region: ${{ env.AWS_REGION }}
+    - run: |
+        aws s3 ls
