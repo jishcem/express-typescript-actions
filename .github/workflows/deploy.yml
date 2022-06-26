@@ -65,3 +65,9 @@ jobs:
     - uses: actions/checkout@v2
     - run: |
         echo "Deploying branch"
+
+    - name: Configure AWS credentials from Test account
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::464615698121:role/gitHub-actions-role
+        aws-region: ${{ env.AWS_REGION }}
