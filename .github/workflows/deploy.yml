@@ -58,8 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-      contents: read    
-    environment: Dev
+      contents: read
     
     steps:
     - uses: actions/checkout@v2
