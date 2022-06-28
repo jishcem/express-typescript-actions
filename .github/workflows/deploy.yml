@@ -71,4 +71,4 @@ jobs:
         role-to-assume: arn:aws:iam::464615698121:role/gitHub-actions-role
         aws-region: ${{ env.AWS_REGION }}
     - run: |
-        aws deploy create-deployment --application-name node-express-app --deployment-group-name node-deployment --s3-location bucket=typescript-express-artifact,key=main/latest/project.zip,bundleType=.zip
+        aws deploy create-deployment --application-name node-express-app --deployment-group-name node-deployment --s3-location bucket=typescript-express-artifact,key=main/latest/project.zip,bundleType=zip
